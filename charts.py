@@ -40,6 +40,7 @@ def make_time_series_chart(df, title, selected_category, selected_years):
         xaxis_title="Time Period (Year)",
         yaxis_title="CPI Index Value",
         legend_title="CPI Variable",
+        title_font_size=22,
         legend_title_font_size=20,
         legend_font_size=18,
         xaxis_title_font_size=20, 
@@ -89,6 +90,7 @@ def make_percentage_change_time_series_chart(df, title, selected_category, selec
         xaxis_title="Time Period (Year)",
         yaxis_title="Percentage Change (%)",
         legend_title="CPI Category",
+        title_font_size=22,        
         legend_title_font_size=20,
         legend_font_size=18,
         xaxis_title_font_size=20, 
@@ -128,6 +130,7 @@ def make_overall_bop_time_series(df, selected_category):
         xaxis_title="Time Period (Year)",
         yaxis_title="Percentage Change (%)",
         legend_title="CPI Category",
+        title_font_size=22,
         legend_title_font_size=20,
         legend_font_size=18,
         xaxis_title_font_size=20, 
@@ -181,9 +184,19 @@ def make_goods_balance_over_time_chart(df, selected_years):
     fig.add_scatter(x=filtered_df['Year'], y=filtered_df['Goods Balance'], mode='lines', name='Goods Balance', line=dict(color='firebrick'))
     
     fig.update_layout(showlegend=True)       
-    fig.update_layout(legend=dict(orientation = "h",yanchor="top",y=-.50,xanchor="right",x=1))   
+    fig.update_layout(legend=dict(orientation = "h",yanchor="top",y=-.50,xanchor="right",x=1))
 
-
+    fig.update_layout(
+        title_font_size=22,
+        legend_title_font_size=20,
+        legend_font_size=18,
+        xaxis_title_font_size=20, 
+        xaxis_tickfont_size=18, 
+        yaxis_title_font_size=20, 
+        yaxis_tickfont_size=18, 
+        hoverlabel_font_size=20
+    )
+       
     return st.plotly_chart(fig, use_container_width=True)
 
 
@@ -216,12 +229,22 @@ def make_services_balance_over_time_chart(df, selected_years):
                   title=f'Services Balance Analysis from {start_year} to {end_year}')
 
     # Add line for Goods Balance
-    fig.add_scatter(x=filtered_df['Year'], y=filtered_df['Services Balance'], mode='lines', name='Goods Balance', line=dict(color='firebrick'))
+    fig.add_scatter(x=filtered_df['Year'], y=filtered_df['Services Balance'], mode='lines', name='Services Balance', line=dict(color='firebrick'))
     
     fig.update_layout(showlegend=True)       
     fig.update_layout(legend=dict(orientation = "h",yanchor="top",y=-.50,xanchor="right",x=1))   
-
-
+    
+    fig.update_layout(
+        title_font_size=22,
+        legend_title_font_size=20,
+        legend_font_size=18,
+        xaxis_title_font_size=20, 
+        xaxis_tickfont_size=18, 
+        yaxis_title_font_size=20, 
+        yaxis_tickfont_size=18, 
+        hoverlabel_font_size=20
+    )
+       
     return st.plotly_chart(fig, use_container_width=True)
 
 
@@ -278,6 +301,18 @@ def make_combined_balance_over_time_chart(df, selected_years, balance_type='Good
     fig.update_traces(mode="lines", hovertemplate=None)
     fig.update_layout(hovermode="x unified")
 
+    fig.update_layout(
+        title_font_size=22,        
+        legend_title_font_size=20,
+        legend_font_size=18,
+        xaxis_title_font_size=20, 
+        xaxis_tickfont_size=18, 
+        yaxis_title_font_size=20, 
+        yaxis_tickfont_size=18, 
+        hoverlabel_font_size=20
+    )
+    
+
     return st.plotly_chart(fig, use_container_width=True)
 
 import plotly.express as px
@@ -330,5 +365,16 @@ def make_combined_goods_services_balance_chart(df, selected_years):
     fig.update_traces(mode="lines", hovertemplate=None)
     fig.update_layout(hovermode="x unified")
 
+    fig.update_layout(
+        title_font_size=22,
+        legend_title_font_size=20,
+        legend_font_size=18,
+        xaxis_title_font_size=20, 
+        xaxis_tickfont_size=18, 
+        yaxis_title_font_size=20, 
+        yaxis_tickfont_size=18, 
+        hoverlabel_font_size=20
+    )
+           
     return st.plotly_chart(fig, use_container_width=True, height=800)
 
