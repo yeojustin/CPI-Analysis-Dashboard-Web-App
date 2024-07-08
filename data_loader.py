@@ -1,5 +1,3 @@
-# data_loader.py
-
 import pandas as pd
 import streamlit as st
 
@@ -282,6 +280,20 @@ def get_L2_keys():
             L2_keys.extend(categories_struct[L1_key].keys())
     return L2_keys
 
+# Function to get all unique keys from the nested structure
+def get_all_keys():
+    all_keys = set()
+
+    def traverse_categories(struct):
+        for key, value in struct.items():
+            all_keys.add(key)
+            if isinstance(value, dict):
+                traverse_categories(value)
+            elif isinstance(value, list):
+                all_keys.update(value)
+
+    traverse_categories(get_categories_struct())
+    return list(all_keys)
 
 # Define BOP category structure
 def get_bop_categories_struct():
@@ -428,3 +440,6 @@ if __name__ == "__main__":
     print("Passed")
     # print(get_bop_L3_keys())
     # print("Passed")
+
+    print("All Keys in CPI Categories:", get_all_keys())
+    print("Passed")

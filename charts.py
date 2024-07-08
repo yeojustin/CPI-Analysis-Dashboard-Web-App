@@ -1,5 +1,3 @@
-# charts.py
-
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
@@ -40,14 +38,14 @@ def make_time_series_chart(df, title, selected_category, selected_years):
         xaxis_title="Time Period (Year)",
         yaxis_title="CPI Index Value",
         legend_title="CPI Variable",
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
 
     fig_top.update_traces(mode="lines", hovertemplate=None)
@@ -90,14 +88,14 @@ def make_percentage_change_time_series_chart(df, title, selected_category, selec
         xaxis_title="Time Period (Year)",
         yaxis_title="Percentage Change (%)",
         legend_title="CPI Category",
-        title_font_size=22,        
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -130,14 +128,14 @@ def make_overall_bop_time_series(df, selected_category):
         xaxis_title="Time Period (Year)",
         yaxis_title="Percentage Change (%)",
         legend_title="CPI Category",
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -184,17 +182,17 @@ def make_goods_balance_over_time_chart(df, selected_years):
     fig.add_scatter(x=filtered_df['Year'], y=filtered_df['Goods Balance'], mode='lines', name='Goods Balance', line=dict(color='firebrick'))
     
     fig.update_layout(showlegend=True)       
-    fig.update_layout(legend=dict(orientation = "h",yanchor="top",y=-.50,xanchor="right",x=1))
+    fig.update_layout(legend=dict(orientation="h", yanchor="top", y=-0.50, xanchor="right", x=1))
 
     fig.update_layout(
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
        
     return st.plotly_chart(fig, use_container_width=True)
@@ -232,21 +230,20 @@ def make_services_balance_over_time_chart(df, selected_years):
     fig.add_scatter(x=filtered_df['Year'], y=filtered_df['Services Balance'], mode='lines', name='Services Balance', line=dict(color='firebrick'))
     
     fig.update_layout(showlegend=True)       
-    fig.update_layout(legend=dict(orientation = "h",yanchor="top",y=-.50,xanchor="right",x=1))   
+    fig.update_layout(legend=dict(orientation="h", yanchor="top", y=-0.50, xanchor="right", x=1))   
     
     fig.update_layout(
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
-       
+    
     return st.plotly_chart(fig, use_container_width=True)
-
 
 
 def make_combined_balance_over_time_chart(df, selected_years, balance_type='Goods'):
@@ -302,23 +299,19 @@ def make_combined_balance_over_time_chart(df, selected_years, balance_type='Good
     fig.update_layout(hovermode="x unified")
 
     fig.update_layout(
-        title_font_size=22,        
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
     
 
     return st.plotly_chart(fig, use_container_width=True)
 
-import plotly.express as px
-import plotly.graph_objects as go
-import pandas as pd
-import streamlit as st
 
 def make_combined_goods_services_balance_chart(df, selected_years):
     """
@@ -366,38 +359,101 @@ def make_combined_goods_services_balance_chart(df, selected_years):
     fig.update_layout(hovermode="x unified")
 
     fig.update_layout(
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14,
+        hoverlabel_font_size=14
     )
            
     return st.plotly_chart(fig, use_container_width=True, height=800)
 
 def make_box_plot_cpi(df, category):
-    # Box plot: Distribution of CPI Categories
-    st.header("Box Plot: Distribution of CPI Categories")
-    cpi_columns = [category]  # adjust based on your actual column names
-    fig = px.box(df, y=cpi_columns, labels={
-        "variable": "CPI Category",
-        "value": "CPI Value"
-    })
+    fig = px.box(df, y=category, labels={
+        "variable": "CPI Categories",
+        "value": "Index Value (2019 as base year)"}, 
+        title="Distribution of CPI Categories",
+        points="all")
 
-    fig.update_layout(hovermode="x unified")
+    # fig.update_layout(hovermode="x unified")
 
     fig.update_layout(
-        title_font_size=22,
-        legend_title_font_size=20,
-        legend_font_size=18,
-        xaxis_title_font_size=20, 
-        xaxis_tickfont_size=18, 
-        yaxis_title_font_size=20, 
-        yaxis_tickfont_size=18, 
-        hoverlabel_font_size=20
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14
     )
 
+    st.plotly_chart(fig)
+
+
+def make_2d_scatter(df, selected_years, cat1, cat2):
+    # Extract the start and end years from the selected range
+    start_year, end_year = selected_years
+
+    # Filter the DataFrame based on the selected year range
+    filtered_df = df[(df['Year'] >= start_year) & (df['Year'] <= end_year)]
+
+    # Create the scatter plot using Plotly Express
+    fig = px.scatter(
+        filtered_df, 
+        x=cat1, 
+        y=cat2, 
+        title=f'Scatter Plot of {cat1} vs {cat2} ({start_year}-{end_year})',
+        labels={cat1: cat1, cat2: cat2}
+    )
+
+    # Update the layout of the figure
+    fig.update_layout(
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        xaxis_title_font_size=16, 
+        xaxis_tickfont_size=14, 
+        yaxis_title_font_size=16, 
+        yaxis_tickfont_size=14
+    )
+
+    # Display the plot in Streamlit
+    st.plotly_chart(fig)
+
+def make_3d_scatter(df, selected_years, cat1, cat2, cat3):
+    # Extract the start and end years from the selected range
+    start_year, end_year = selected_years
+
+    # Filter the DataFrame based on the selected year range
+    filtered_df = df[(df['Year'] >= start_year) & (df['Year'] <= end_year)]
+
+    # Create the 3D scatter plot using Plotly Express
+    fig = px.scatter_3d(
+        filtered_df,
+        x=cat1,
+        y=cat2,
+        z=cat3,
+        title=f'3D Scatter Plot of {cat1}, {cat2}, and {cat3} ({start_year}-{end_year})',
+        labels={cat1: cat1, cat2: cat2, cat3: cat3}
+    )
+
+    # Update the layout of the figure
+    fig.update_layout(
+        title_font_size=16,
+        legend_title_font_size=14,
+        legend_font_size=14,
+        scene=dict(
+            xaxis_title_font_size=16,
+            yaxis_title_font_size=16,
+            zaxis_title_font_size=16,
+            xaxis_tickfont_size=14,
+            yaxis_tickfont_size=14,
+            zaxis_tickfont_size=14
+        )
+    )
+
+    # Display the plot in Streamlit
     st.plotly_chart(fig)

@@ -1,0 +1,7 @@
+*.pem
+
+.env
+
+mystapp
+
+.DS_Store
