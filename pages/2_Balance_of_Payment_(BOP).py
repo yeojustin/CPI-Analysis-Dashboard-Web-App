@@ -144,6 +144,5 @@ with col2, st.container(border=True):
             </p>
             """, unsafe_allow_html=True)
 
-charts.make_combined_balance_over_time_chart(df,sel_yr_range,balance_type='Services')
-charts.make_combined_balance_over_time_chart(df,sel_yr_range,balance_type='Goods')
-charts.make_combined_goods_services_balance_chart(df,sel_yr_range)
+with st.container(border=True):
+    charts.make_combined_goods_services_balance_chart(df,sel_yr_range)

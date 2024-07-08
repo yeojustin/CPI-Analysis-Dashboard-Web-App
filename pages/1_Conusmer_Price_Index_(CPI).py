@@ -94,6 +94,9 @@ else:
     
     metrics = charts.calculate_metrics(df_yearly, sel_cat, sel_yr)
 
+
+charts.make_box_plot_cpi(df_yearly, sel_cat)
+
 # Display metrics
 if metrics:
     with st.container(border=True):

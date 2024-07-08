@@ -12,97 +12,78 @@ st.set_page_config(page_title="CPI Analysis", layout="wide", page_icon="📈", i
                        'Report a Bug': 'https://www.google.com'
                    })
 
-# Content for CPI and its relationship with AD and BOP
-cpi_content = """
-# Consumer Price Index (CPI)
+st.write("""
+        <h2>Exploring the Relationship Between CPI, AD, and BOP</h2>
+        <h3>Hypothesis</h3>
+        <p>We hypothesize that changes in the Consumer Price Index (CPI) significantly influence the Balance of Payments (BOP) and, consequently, Aggregate Demand (AD).
+        Specifically, we aim to explore how inflation (as measured by CPI) impacts the trade balance, investment flows, and overall economic stability.</p>
 
-**CPI measures the average change over time in the prices paid by urban consumers for a basket of consumer goods and services. It is a key indicator of inflation and purchasing power in an economy.**
+        <h3>Understanding Key Concepts</h3>
+""", unsafe_allow_html=True)
 
-CPI includes various categories such as:
-- Food and beverages
-- Housing
-- Apparel
-- Transportation
-- Medical care
-- Recreation
-- Education
-- Other goods and services
+with st.container(border=True):
+    st.write("""
+            <h3>What is the Consumer Price Index (CPI)?</h3> 
+            <p style="font-size: 1em; font-weight: normal;">
+            CPI measures the average change over time in the prices paid by urban consumers for a basket of consumer goods and services. It is a key indicator of inflation 
+            and purchasing power in an economy.</p>
+        """, unsafe_allow_html=True)
 
-## Relationship to AD = C + G + I + X - M
+col1, col2 = st.columns(2)
 
-**CPI indirectly influences components of aggregate demand (AD) through its impact on consumer spending (C). Changes in CPI can affect consumer behavior, influencing their spending patterns on goods and services.**
+with col1:
+    with st.container(border=True, height=360):
+        st.write("""
+                <h3>What is the Balance of Payments (BOP)?</h3>
+                <p style="font-size: 1rem; font-weight: normal;">
+                BOP is a comprehensive record of a country’s economic transactions with the rest of the world over a specific period. It includes:
+                <ul>
+                    <li><b>Current Account:</b> Records trade in goods and services, income from abroad, and current transfers.</li>
+                    <li><b>Capital Account:</b> Records capital transfers and the acquisition/disposal of non-produced, non-financial assets.</li>
+                    <li><b>Financial Account:</b> Records investments in foreign assets and liabilities.</li>
+                </ul>
+                </p>
+            """, unsafe_allow_html=True)
 
-- **Consumer Spending (C):** Inflation, as measured by CPI, affects the purchasing power of consumers, thereby influencing their spending on goods and services.
-- **Investment (I):** Inflation also influences investment decisions by affecting interest rates and the cost of capital.
-- **Imports (M) and Exports (X):** Changes in relative price levels due to inflation impact international competitiveness, thereby affecting imports and exports.
+with col2:
+    with st.container(border=True, height=360):
+        st.write("""
+                <h3>What is Aggregate Demand (AD)?</h3>
+                <p style="font-size: 1rem; font-weight: normal;">
+                Aggregate Demand represents the total demand for goods and services within an economy. It is composed of:
+                <ul>
+                    <li><b>C (Consumer Spending):</b> Total spending by households on goods and services.</li>
+                    <li><b>G (Government Spending):</b> Total government expenditures on goods and services.</li>
+                    <li><b>I (Investment):</b> Spending on capital goods that will be used for future production.</li>
+                    <li><b>X (Exports):</b> Goods and services produced domestically and sold abroad.</li>
+                    <li><b>M (Imports):</b> Goods and services bought from other countries.</li>
+                </ul>
+                <p><b>Formula: AD = C + I + G + (X - M)</b></p>
+                </p>
+            """, unsafe_allow_html=True)
 
-## BOP and CPI Interaction
+with st.container(border=True):
+    st.write("""
+            <h3>Relationship Between CPI, AD, and BOP</h3>
+            <ul>
+                <li><b>CPI and Consumer Spending (C):</b> Higher inflation (CPI) reduces purchasing power, affecting how much consumers can buy.</li>
+                <li><b>CPI and Investment (I):</b> Inflation influences interest rates, impacting borrowing costs and investment decisions.</li>
+                <li><b>CPI and Trade Balance (X - M):</b> Inflation affects the prices of goods and services, influencing exports and imports.</li>
+            </ul>
+            """,unsafe_allow_html=True)
 
-**While CPI itself is not directly a part of BOP calculations, changes in CPI can influence the BOP indirectly. For example, higher inflation (as indicated by CPI) may affect the cost structure of exports and imports, thereby influencing the trade balance (X - M) in the BOP.**
+st.write("""
+        <h3>BOP and AD Interaction</h3>
+        <p>The <b>current account</b> of the BOP directly relates to the net exports component (X - M) of AD. Changes in net exports affect AD because net exports are part of the AD formula: <b>AD = C + I + G + (X - M)</b>. Inflation (CPI) influences both AD components and BOP components. For instance, higher inflation can reduce exports and increase imports, impacting the current account balance and thus affecting AD.</p>
 
-- **Trade Balance (X - M):** Inflation impacts the prices of goods and services, influencing the competitiveness of exports and the cost of imports.
-- **Primary Income:** Inflation affects the real value of income flows in the BOP, as nominal values may change due to price adjustments.
-
-**In summary, while CPI and the components of AD = C + G + I + X - M are distinct concepts, CPI serves as a critical economic indicator that influences consumer behavior, economic policy decisions, and indirectly impacts the components of aggregate demand and the Balance of Payments through its effects on prices and purchasing power.**
-"""
-
-import streamlit as st
-
-# Content for CPI, AD, and BOP
-content_hypo = """
-# Exploring the Relationship Between CPI, AD, and BOP
-
-## Hypothesis
-
-We hypothesize that changes in the Consumer Price Index (CPI) significantly influence the Balance of Payments (BOP) and, consequently, Aggregate Demand (AD). Specifically, we aim to explore how inflation (as measured by CPI) impacts the trade balance, investment flows, and overall economic stability.
-
-## Understanding Key Concepts
-
-### What is the Consumer Price Index (CPI)?
-
-CPI measures the average change over time in the prices paid by urban consumers for a basket of consumer goods and services. It is a key indicator of inflation and purchasing power in an economy. 
-
-### What is the Balance of Payments (BOP)?
-
-BOP is a comprehensive record of a country’s economic transactions with the rest of the world over a specific period. It includes:
-- **Current Account:** Records trade in goods and services, income from abroad, and current transfers.
-- **Capital Account:** Records capital transfers and the acquisition/disposal of non-produced, non-financial assets.
-- **Financial Account:** Records investments in foreign assets and liabilities.
-
-### What is Aggregate Demand (AD)?
-
-Aggregate Demand represents the total demand for goods and services within an economy. It is composed of:
-- **C (Consumer Spending):** Total spending by households on goods and services.
-- **G (Government Spending):** Total government expenditures on goods and services.
-- **I (Investment):** Spending on capital goods that will be used for future production.
-- **X (Exports):** Goods and services produced domestically and sold abroad.
-- **M (Imports):** Goods and services bought from other countries.
-
-**Formula: AD = C + I + G + (X - M)**
-
-### Relationship Between CPI, AD, and BOP
-
-- **CPI and Consumer Spending (C):** Higher inflation (CPI) reduces purchasing power, affecting how much consumers can buy.
-- **CPI and Investment (I):** Inflation influences interest rates, impacting borrowing costs and investment decisions.
-- **CPI and Trade Balance (X - M):** Inflation affects the prices of goods and services, influencing exports and imports.
-
-### BOP and AD Interaction
-
-- The **current account** of the BOP directly relates to the net exports component (X - M) of AD.
-- Changes in net exports affect AD because net exports are part of the AD formula: **AD = C + I + G + (X - M)**.
-- Inflation (CPI) influences both AD components and BOP components. For instance, higher inflation can reduce exports and increase imports, impacting the current account balance and thus affecting AD.
-
-## Example to Illustrate
-
-Consider a country experiencing high inflation:
-- **Consumer Impact:** Higher prices mean consumers can buy less, reducing overall spending (C).
-- **Investment Impact:** Rising costs and uncertainty might deter investment (I).
-- **Trade Impact:** Domestic goods become more expensive relative to foreign goods, potentially reducing exports (X) and increasing imports (M), thereby worsening the trade balance and affecting the BOP.
-
-## Summary
-
-While CPI and the components of AD = C + I + G + (X - M) are distinct concepts, CPI serves as a critical economic indicator that influences consumer behavior, economic policy decisions, and indirectly impacts the components of aggregate demand and the Balance of Payments through its effects on prices and purchasing power.
-"""
+        <h3>Example to Illustrate</h3>
+        <p>Consider a country experiencing high inflation:
+        <ul>
+            <li><b>Consumer Impact:</b> Higher prices mean consumers can buy less, reducing overall spending (C).</li>
+            <li><b>Investment Impact:</b> Rising costs and uncertainty might deter investment (I).</li>
+            <li><b>Trade Impact:</b> Domestic goods become more expensive relative to foreign goods, potentially reducing exports (X) and increasing imports (M), thereby worsening the trade balance and affecting the BOP.</li>
+        </ul></p>
+         """, unsafe_allow_html=True)
 
 data = dlr.load_bop_cpi_merged()
 

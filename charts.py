@@ -378,3 +378,26 @@ def make_combined_goods_services_balance_chart(df, selected_years):
            
     return st.plotly_chart(fig, use_container_width=True, height=800)
 
+def make_box_plot_cpi(df, category):
+    # Box plot: Distribution of CPI Categories
+    st.header("Box Plot: Distribution of CPI Categories")
+    cpi_columns = [category]  # adjust based on your actual column names
+    fig = px.box(df, y=cpi_columns, labels={
+        "variable": "CPI Category",
+        "value": "CPI Value"
+    })
+
+    fig.update_layout(hovermode="x unified")
+
+    fig.update_layout(
+        title_font_size=22,
+        legend_title_font_size=20,
+        legend_font_size=18,
+        xaxis_title_font_size=20, 
+        xaxis_tickfont_size=18, 
+        yaxis_title_font_size=20, 
+        yaxis_tickfont_size=18, 
+        hoverlabel_font_size=20
+    )
+
+    st.plotly_chart(fig)
