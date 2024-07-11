@@ -292,7 +292,12 @@ def get_all_keys():
             elif isinstance(value, list):
                 all_keys.update(value)
 
+    # Traverse CPI categories
     traverse_categories(get_categories_struct())
+
+    # Traverse BOP categories
+    traverse_categories(get_bop_categories_struct())
+
     return list(all_keys)
 
 # Define BOP category structure
@@ -402,7 +407,7 @@ def get_bop_categories_struct():
                     }
                 }
             },
-            "C Net Errors & Omissions": {[]},
+            "C Net Errors & Omissions": {},
             "E Reserve Assets": [
                 "Special Drawing Rights",
                 "Reserves Position In The IMF",
@@ -432,6 +437,12 @@ def get_bop_L3_keys(L1_key, L2_key):
             for L3_key in L3_value:
                 L3_keys.append(L3_key)
     return L3_keys
+
+def get_bop_L1_keys():
+    categories_struct = get_bop_categories_struct()
+    return list(categories_struct.keys())
+
+
 
 if __name__ == "__main__":
     print(get_bop_L1_keys())

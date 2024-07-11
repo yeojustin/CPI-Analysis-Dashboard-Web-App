@@ -2,6 +2,65 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
+import numpy as np
+
+def make_corr_heatmap(df, title, selected_category, selected_years):
+    selected_category = [cat for cat in selected_category if cat in df.columns]
+
+    if not selected_category:
+        st.error("No valid categories selected.")
+        return
+
+    # Convert relevant columns to numeric, handling errors by setting invalid parsing as na
+    df[selected_category] = df[selected_category].apply(pd.to_numeric, errors='coerce')
+
+    # Filter the dataframe based on the selected date range
+    start_year, end_year = selected_years
+    filtered_df = df.loc[start_year:end_year]
+
+    if filtered_df.empty:
+        st.error("No data available for the selected date range.")
+        return
+
+    # Calculate the correlation matrix
+    corr_matrix = filtered_df[selected_category].corr()
+
+    # Create the heatmap
+    heatmap = go.Heatmap(
+        z=corr_matrix.values,
+        x=corr_matrix.columns,
+        y=corr_matrix.columns,
+        colorscale='RdBu_r',
+        colorbar=dict(title='Correlation')
+    )
+
+    # Create layout for the figure
+    layout = go.Layout(
+        title=title,
+        title_font_size=16,
+        xaxis=dict(
+            title='Categories',
+            title_font_size=16,
+            tickfont_size=14,
+            showticklabels=True,
+            tickangle=45
+        ),
+        yaxis=dict(
+            title='Categories',
+            title_font_size=16,
+            tickfont_size=14,
+            showticklabels=True
+        ),
+        hoverlabel=dict(
+            font_size=14
+        )
+    )
+
+    fig = go.Figure(data=[heatmap], layout=layout)
+
+    # Display the heatmap in Streamlit
+    st.plotly_chart(fig, use_container_width=True)
+
 
 def make_time_series_chart(df, title, selected_category, selected_years): 
 
@@ -393,7 +452,21 @@ def make_box_plot_cpi(df, category):
     st.plotly_chart(fig)
 
 
-def make_2d_scatter(df, selected_years, cat1, cat2):
+def make_2d_scatter(df, selected_years, cat1, cat2, color, add_best_fit_line=False):
+    """
+    Create a 2D scatter plot with optional best fit line.
+
+    Parameters:
+    - df (DataFrame): DataFrame containing the data.
+    - selected_years (tuple): Tuple containing the start and end years for filtering the data.
+    - cat1 (str): Column name for the x-axis data.
+    - cat2 (str): Column name for the y-axis data.
+    - color (str, optional): Column name for coloring the points based on a categorical variable.
+    - add_best_fit_line (bool, optional): Whether to add a best fit line to the plot.
+
+    Returns:
+    - None: Displays the plot using Streamlit.
+    """
     # Extract the start and end years from the selected range
     start_year, end_year = selected_years
 
@@ -405,9 +478,27 @@ def make_2d_scatter(df, selected_years, cat1, cat2):
         filtered_df, 
         x=cat1, 
         y=cat2, 
-        title=f'Scatter Plot of {cat1} vs {cat2} ({start_year}-{end_year})',
-        labels={cat1: cat1, cat2: cat2}
+        title=f'Scatter Plot of {cat1} vs {cat2}',
+        labels={cat1: cat1, cat2: cat2},
+        color=color,  # Set color parameter if provided
+        opacity=0.7  # Set opacity for better visualization of overlapping points
     )
+
+    # Add best fit line if requested and both cat1 and cat2 are numerical columns
+    if add_best_fit_line and np.issubdtype(filtered_df[cat1].dtype, np.number) and np.issubdtype(filtered_df[cat2].dtype, np.number):
+        # Compute best fit line
+        m, b = np.polyfit(filtered_df[cat1], filtered_df[cat2], 1)
+        x_range = np.linspace(filtered_df[cat1].min(), filtered_df[cat1].max(), 100)
+        y_range = m * x_range + b
+
+        # Add best fit line to the plot
+        fig.add_trace(go.Scatter(
+            x=x_range,
+            y=y_range,
+            mode='lines',
+            name=f'Best Fit Line (m={m:.2f}, b={b:.2f})',
+            line=dict(color='black', width=2)
+        ))
 
     # Update the layout of the figure
     fig.update_layout(
@@ -417,11 +508,50 @@ def make_2d_scatter(df, selected_years, cat1, cat2):
         xaxis_title_font_size=16, 
         xaxis_tickfont_size=14, 
         yaxis_title_font_size=16, 
-        yaxis_tickfont_size=14
+        yaxis_tickfont_size=14,
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
     )
 
     # Display the plot in Streamlit
     st.plotly_chart(fig)
+
+
+
+# def make_2d_scatter(df, selected_years, cat1, cat2):
+#     # Extract the start and end years from the selected range
+#     start_year, end_year = selected_years
+
+#     # Filter the DataFrame based on the selected year range
+#     filtered_df = df[(df['Year'] >= start_year) & (df['Year'] <= end_year)]
+
+#     # Create the scatter plot using Plotly Express
+#     fig = px.scatter(
+#         filtered_df, 
+#         x=cat1, 
+#         y=cat2, 
+#         title=f'Scatter Plot of {cat1} vs {cat2})',
+#         labels={cat1: cat1, cat2: cat2}
+#     )
+
+#     # Update the layout of the figure
+#     fig.update_layout(
+#         title_font_size=16,
+#         legend_title_font_size=14,
+#         legend_font_size=14,
+#         xaxis_title_font_size=16, 
+#         xaxis_tickfont_size=14, 
+#         yaxis_title_font_size=16, 
+#         yaxis_tickfont_size=14
+#     )
+
+#     # Display the plot in Streamlit
+#     st.plotly_chart(fig)
 
 def make_3d_scatter(df, selected_years, cat1, cat2, cat3):
     # Extract the start and end years from the selected range
