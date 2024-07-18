@@ -24,6 +24,9 @@ with st.container(border=True):
             and purchasing power in an economy.</p>
         """, unsafe_allow_html=True)
 
+    st.write("<h5>Understand CPI in under 2 mins!</h5>", unsafe_allow_html=True)
+    st.video("https://www.youtube.com/watch?v=Pz_khNngnEQ&ab_channel=ECOHOLICS-LargestPlatformforEconomics")
+
 with st.container(border=True):
     st.write("""
             <h4>What is the Balance of Payments (BOP)? 📊</h4>
@@ -36,6 +39,9 @@ with st.container(border=True):
             </ul>
             </p>
         """, unsafe_allow_html=True)
+    
+    st.write("<h5>Understand BOP in 5 mins!</h5>", unsafe_allow_html=True)
+    st.video("https://www.youtube.com/watch?v=5_p5zk5qQos&ab_channel=BangkoSentral")
 
 with st.container(border=True):
     st.write("""
@@ -52,6 +58,7 @@ with st.container(border=True):
             <p><b>Formula: AD = C + I + G + (X - M)</b></p>
             </p>
         """, unsafe_allow_html=True)
+
 
 with st.container(border=True):
     st.write("""
